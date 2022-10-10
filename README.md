@@ -94,7 +94,8 @@ the ARI, we got the maximum ARI with the following parameters.
 
 ```
 n_components: It is the number of mixture components. Here it is given by the number of vessels 
-(20 for the first dataset and 8 for the second dataset). It can also be chosen manually using different analysis.
+(20 for the first dataset and 8 for the second dataset). It can also be chosen manually using 
+different analysis.
 
 covariance_type: Out of full, tied, diag and spherical, we used spherical because it was 
 suitable for our preprocessed features
