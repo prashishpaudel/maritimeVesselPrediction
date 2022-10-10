@@ -104,8 +104,10 @@ initialized using it.
 
 andom_state: It controls the random seed. We set it to 100.
 ```
-<br>
-![Alt text](Figure 2021-12-14 221155.png?raw=true "Optional Title")
+<b><ins>Application Layout:</ins></b>
+
+![Alt text](clusterAnalysis.png?raw=true "Optional Title")
+
 <br>
 We performed silhouette analysis for selecting the number of clusters in our dataset. Silhouette
 analysis is also helpful in the study of the separation distance between the resulting clusters. While
