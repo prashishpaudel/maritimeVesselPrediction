@@ -1,35 +1,6 @@
-## Machine Learning [EECS 5750]
+# Vessel Prediction from Automatic Identification System (AIS) Data
 
-## Case Study
-
-## on
-
-## Vessel Prediction from Automatic
-
-## Identification System (AIS) Data
-
-### Submitted by:
-
-### Neeraj Shrestha
-
-### R
-
-### Prashish Paudel
-
-### R
-
-### Neeraj.Shrestha@rockets.utoledo.edu
-
-### prashish.paudel@rockets.utoledo.edu
-
-### Date: 12/15/
-
-
-### Vessel Prediction from Automatic Identification System
-
-### (AIS) Data
-
-### Introduction
+<h3><b>Introduction</b></h3>
 
 Automatic Identification System (AIS) is an automated, self-contained tracking system widely
 used by Vessel traffic services in the maritime system to exchange navigational data. In this case
@@ -40,7 +11,7 @@ of various vessels based on location reports without the use of MMSIs. To achiev
 we applied various preprocessing techniques to the features and tried many algorithms which we
 will discuss throughout this report.
 
-### Data Preprocessing
+<h3><b>Data Preprocessing</b></h3>
 
 For this case study, we were provided with three datasets namely set1.csv, set2.csv, and
 set3noVID.csv. Each row of all the datasets corresponds to an observation of a single maritime
@@ -54,10 +25,7 @@ was provided to us for testing purposes whereas dataset set3noVID.csv has all VI
 was kept for our evaluation.
 
 We started our case study by studying datasets. We found that the value of SEQUENCE_DTTM
-lies between 14:00:00 and 17:59:58. The value of latitude is around 36 and longitude is around –
-
-76. We found that there is no pattern in SPEED_OVER_GROUND and
-COURSE_OVER_GROUND and a particular vessel can have any value for those at different
+lies between 14:00:00 and 17:59:58. The value of latitude is around 36 and longitude is around –76. We found that there is no pattern in SPEED_OVER_GROUND and COURSE_OVER_GROUND and a particular vessel can have any value for those at different
 SEQUENCE_DTTM.
 
 Our preprocessing is based on the assumption that vessels with the same VID moving at a certain
@@ -68,10 +36,9 @@ But we thought that this is the best approach that we could follow and continued
 of this approach was to find the final latitude and longitude of the vessel using the current latitude,
 longitude, speed, angle, and time of the vessel and use the find latitude and longitude only as the
 feature to predict the clusters. To implement this, we first created a function def
-getNewCoordinates(lat,lon,time,speed,angle) where we first converted the angle into radians. We
+getNewCoordinates(lat,lon,time,speed,angle) where we first converted the angle into radians. 
 
-
-then computed the distance in km the vessel has traveled using speed and time difference between
+We then computed the distance in km the vessel has traveled using speed and time difference between
 the current time and end time in seconds (64796). Then, we computed the final latitude and
 longitude using the radius of the earth, computed distance, and implemented those values in a
 formula that is similar to the Haversine formula. Then we created a new feature matrix using only
@@ -82,7 +49,7 @@ and it decreased the Adjusted Rand index(ARI). We also tried to use unsupervised
 extraction techniques like Kernel Principal Component Analysis, which is used to project the
 features into higher dimensional feature space, but it did not bring any improvement to the result.
 
-### Algorithm Selection
+<h3><b>Algorithm Selection</b></h3>
 
 We implemented and tested many unsupervised models. We only used unsupervised models
 because the VID (label) in three datasets is not consistent, and each VID does not represent the
@@ -115,8 +82,7 @@ an Adjusted Rand Index of 0.6291664420304007. For the first dataset, our ARI was
 ARI of the baseline algorithm given to us whereas it was higher for the second dataset. So, the
 ARI of the Gaussian Mixture Model was highest among all the algorithms that we used.
 
-
-### Selected Algorithm
+<h3><b>Selected Algorithm</b></h3>
 
 We selected the Gaussian mixture model with expectation-maximization (EM) algorithm for
 fitting a mixture of Gaussian models. We are using an unsupervised algorithm that does not use
@@ -127,14 +93,14 @@ different results for different parameter values. After manually changing the pa
 the ARI, we got the maximum ARI with the following parameters.
 
 ```
- n_components: It is the number of mixture components. Here it is given by the number of
+-> n_components: It is the number of mixture components. Here it is given by the number of
 vessels (20 for the first dataset and 8 for the second dataset). It can also be chosen
 manually using different analysis.
- covariance_type: Out of full, tied, diag and spherical, we used spherical because it was
+-> covariance_type: Out of full, tied, diag and spherical, we used spherical because it was
 suitable for our preprocessed features
- init_params: Out of kmeans and random, we chose kmeans so that responsibilities can be
+-> init_params: Out of kmeans and random, we chose kmeans so that responsibilities can be
 initialized using it.
- random_state: It controls the random seed. We set it to 100.
+-> random_state: It controls the random seed. We set it to 100.
 ```
 We performed silhouette analysis for selecting the number of clusters in our dataset. Silhouette
 analysis is also helpful in the study of the separation distance between the resulting clusters. While
@@ -146,7 +112,7 @@ silhouette coefficient of 0.40 but various groups of the clusters had a negative
 cluster no =10, fewer groups had negative values and the silhouette coefficient was also
 comparable to the highest silhouette coefficient (cluster =13), we chose our cluster number = 10.
 
-### Evaluation
+<h3><b>Evaluation</b></h3>
 
 In evaluating the effectiveness of our algorithm as a multiple target tracking system, the goal is to
 measure the distance between two sets of tracks i.e the set of ground truth tracks and the set of
@@ -187,7 +153,7 @@ isolation forest which isolates the outlier from the given features by randomly 
 then randomly selecting a split value between the max and min values of that feature.
 
 
-### Conclusion
+<h3><b>Conclusion</b></h3>
 
 This is how the model for tracking motion of different vessels without Vessel ID was developed
 in this case study. Our preprocessing technique was carried out for it to be done. Tested candidates
