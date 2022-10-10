@@ -93,14 +93,14 @@ different results for different parameter values. After manually changing the pa
 the ARI, we got the maximum ARI with the following parameters.
 
 ```
--> n_components: It is the number of mixture components. Here it is given by the number of
+<b>n_components</b>: It is the number of mixture components. Here it is given by the number of
 vessels (20 for the first dataset and 8 for the second dataset). It can also be chosen
 manually using different analysis.
--> covariance_type: Out of full, tied, diag and spherical, we used spherical because it was
+<b>covariance_type</b>: Out of full, tied, diag and spherical, we used spherical because it was
 suitable for our preprocessed features
--> init_params: Out of kmeans and random, we chose kmeans so that responsibilities can be
+<b>init_params</b>: Out of kmeans and random, we chose kmeans so that responsibilities can be
 initialized using it.
--> random_state: It controls the random seed. We set it to 100.
+<b>andom_state</b>: It controls the random seed. We set it to 100.
 ```
 We performed silhouette analysis for selecting the number of clusters in our dataset. Silhouette
 analysis is also helpful in the study of the separation distance between the resulting clusters. While
